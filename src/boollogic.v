@@ -112,4 +112,23 @@ Proof.
     rewrite Hb2.
     simpl. reflexivity.
 Qed. 
-
+(* /\ -> & symbol*)
+Theorem andb_true_otherside: forall(b1 b2: bool),
+    andb b1 b2 = true -> b1 = true /\ b2 = true.
+Proof.
+    intros b1 b2 Hb.
+    destruct b1.
+    destruct b2.
+    (* split gives us 2 ands in our goal -> and breaks them into 2 goals*)
+    split. reflexivity.
+    reflexivity.
+    (* now goal 1 is false = true which we can't prove*)
+    split. reflexivity.
+    simpl in Hb.
+    inversion Hb.
+    destruct b2.
+    simpl in Hb.
+    inversion Hb.
+    simpl in Hb.
+    inversion Hb.
+Qed.
