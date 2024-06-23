@@ -35,4 +35,36 @@ Proof.
 Qed.
 
 
+(* trying to prove something that is false*)
+(*Theorem i_belive_its_true: forall (b: bool),negb b = b.
+(* trying to prove this *)
+Proof.
+    intros b.
+    destruct b.
+    (* anything which is false, is getting proved true here*)
+    (*+ simpl. *)
+    *)
+
+Theorem negb_negb: forall (b: bool), negb (negb b) = b.
+Proof.
+    intros b.
+    destruct b.
+    + simpl. reflexivity.
+    + simpl. reflexivity.
+Qed.
+
+
+(* taking negation three times*)
+Theorem negb_thrice: forall (b: bool), negb (negb (negb b)) = negb b.
+Proof.
+    (* coming up with statements here needs to check and the datatype and what property it holds*)
+    intros b.
+    (* destruct into types for b *)
+    destruct b.
+    (* simplification and reflexivity check*)
+    + simpl. reflexivity.
+    + simpl. reflexivity.
+Qed.
+
+
 
