@@ -66,5 +66,50 @@ Proof.
     + simpl. reflexivity.
 Qed.
 
+Definition andb (b1 b2: bool): bool := 
+    (* function definition for boolean and operation*)
+    match b1,b2 with 
+    | true,true => true 
+    (* | false, true => false
+    | true, false => false 
+    | false, false => false
+     other cases are all false so we can do as *)
+    | _,_ => false
+    end. 
+(* these are literally assiting us whenever if we miss a case *)
 
+
+Definition orb (b1 b2 : bool): bool :=
+    match b1, b2 with 
+    | true,true => true
+    | false,false => false
+    | true, false =>true
+    | false,true => true 
+    end.
+
+(* for all arbitary values of types bool, if b1 is true and b2 is true , then the whole expression will be true *)
+Theorem andb_true_both_arg_true: forall (b1 b2: bool),
+    b1 = true -> b2 = true -> andb b1 b2 = true.
+Proof.
+    (* set up hypothesis *)
+    intros b1 b2 Hb1 Hb2.
+    destruct b1.
+    destruct b2.
+    + simpl. reflexivity.
+    + simpl. inversion Hb2.
+    + destruct b2.
+      ++ simpl. inversion Hb1.
+      ++ simpl. inversion Hb1.
+Qed.
+
+(* in a more simpler way*)
+Theorem andb_true_both_arg_true_v2: forall (b1 b2: bool),
+b1 = true -> b2 = true -> andb b1 b2 = true.
+Proof.
+    intros b1 b2 Hb1 Hb2.
+    (* replace left side with true *)
+    rewrite Hb1.
+    rewrite Hb2.
+    simpl. reflexivity.
+Qed. 
 
